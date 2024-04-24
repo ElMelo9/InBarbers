@@ -1,5 +1,5 @@
 from src.models.usuario import UsuarioResponse,UsuarioCreate,UsuarioUpdate
-from src.database.repositories.usuarios import UsuariosRepository
+from src.database.repositories.usuarios_repo import UsuariosRepository
 
 
 class UserService:

@@ -9,6 +9,7 @@ class RolesRepository:
         self.client = supabase
 
     def insert(self, rol_data: dict) -> dict:
+        print(rol_data)
         response = self.client.from_("roles").insert(rol_data).execute()
         return response.data[0] if response.data else None
 

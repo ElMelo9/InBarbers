@@ -22,11 +22,10 @@ class RolController:
             raise HTTPException(status_code=500, detail=str(e))
         
 
-    def insert_rol(self, rol_dict: dict):
+    def insert_rol(self, rol_dict:RolCreate):
         try:
-            rol_create= RolCreate(**rol_dict)   
-            rol_response= self.rol_service.insertRol(rol_create)
-            return rol_dict(rol_response.model_dump())
+            rol_response= self.rol_service.insertRol(rol_dict)
+            return (rol_response.model_dump())
         
         except Exception as e:
             # Manejo de errores

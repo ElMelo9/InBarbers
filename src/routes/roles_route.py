@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from src.models.rol import RolCreate
 from src.controllers.roles_controllers import RolController
 
 roles = APIRouter()
@@ -10,6 +11,6 @@ def get_all():
 
 
 @roles.post("/roles/insert")
-def insert_rol(rol_data):
+def insert_rol(rol_data: RolCreate):
     # Llama al controlador para insertar el rol
     return rol_controller.insert_rol(rol_data)
