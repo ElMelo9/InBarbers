@@ -30,6 +30,7 @@ class UsuarioResponse(BaseModel):
     fecha_md: Optional[datetime] = None
 
 class UsuarioUpdate(BaseModel):
+    id_usuario: int
     id_rol: Optional[int] = None
     id_barrio: Optional[int] = None
     id_tipo_documento: Optional[int] = None

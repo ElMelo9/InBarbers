@@ -15,6 +15,10 @@ class UsuariosRepository:
     def getById(self, user_id: int) -> Optional[dict]:
         response = self.client.from_("usuarios").select("*").eq("id_usuario", user_id).execute()
         return response.data[0] if response.data else None
+    
+    def getByEmail(self, email_usuario: str) -> Optional[dict]:
+        response = self.client.from_("usuarios").select("*").eq("email_usuario", email_usuario).execute()
+        return response.data[0] if response.data else None
 
     def getAll(self) -> list:
         response = self.client.from_("usuarios").select("*").execute()

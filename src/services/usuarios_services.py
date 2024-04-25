@@ -1,3 +1,4 @@
+from src.models.login import Login, LoginResponse
 from src.models.usuario import UsuarioResponse,UsuarioCreate,UsuarioUpdate
 from src.database.repositories.usuarios_repo import UsuariosRepository
 
@@ -34,3 +35,19 @@ class UserService:
         usuarios_list = [UsuarioResponse(**usuario) for usuario in response_dict]
 
         return usuarios_list
+
+    def getUsuarioByEmail(self,email_usuario: str) -> UsuarioResponse:
+        # Obtener el usuario por email
+        usuario_dict = self.user_repo.getByEmail(email_usuario)
+        if not usuario_dict:
+            raise ValueError("User not found")
+
+        return UsuarioResponse(**usuario_dict)
+    
+
+    def usuarioLogin(self,email_usuario: str) -> dict:
+        # Obtener el usuario por email
+        usuario_dict = self.user_repo.getByEmail(email_usuario)
+        if not usuario_dict:
+            raise ValueError("Email incorrecto")
+        return usuario_dict
