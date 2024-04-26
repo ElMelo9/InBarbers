@@ -14,6 +14,5 @@ class BarrioResponse(BaseModel):
     fecha_md: Optional[datetime] = None
 
 class BarrioUpdate(BaseModel):
-    id_barrio: str
     nombre_barrio: str
     estado_rg: Optional[int] = None

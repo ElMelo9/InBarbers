@@ -35,7 +35,7 @@ class Token:
         }
      
 
-     def verificarToken(self,token: str):
+     def decodificarToken(self,token: str):
         try:
             # Decodificar el token
             payload = jwt.decode(
@@ -60,9 +60,9 @@ class Token:
 
 
 # Función para obtener el usuario actual a partir del token
-def get_current_user(token: str = Depends(oauth2_scheme)):
+def verificarToken(token: str = Depends(oauth2_scheme)):
     token_instance = Token()
     try:
-        return token_instance.verificarToken(token)
+        return token_instance.decodificarToken(token)
     except HTTPException as he:
         raise he

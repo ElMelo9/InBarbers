@@ -30,8 +30,8 @@ class UsuariosRepository:
         # Devuelve el primer elemento actualizado o None
         return response.data[0] if response.data else None
 
-    def delete(self, user_id: int) -> bool:
+    def delete(self, user_id: int):
         # Elimina el usuario por ID
         response = self.client.from_("usuarios").delete().eq("id_usuario", user_id).execute()
         # Devuelve True si la operación fue exitosa, False de lo contrario
-        return bool(response.data)
+        return response.data

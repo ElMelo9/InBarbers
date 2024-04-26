@@ -1,34 +1,40 @@
-from src.models.barrio import BarrioCreate,BarrioResponse,BarrioUpdate
+from typing import List, Optional
+from src.models.barrio import BarrioCreate, BarrioResponse, BarrioUpdate
 from src.database.repositories.barrios_repo import BarriosRepository
 
 
-class BarrioService:
-
+class BarriosService:
     def __init__(self):
-        self.barrio_repo = BarriosRepository()
+        self.barrio_repo = BarriosRepository()  # Instancia del repositorio
 
-
-    def insertBarrio(self, barrio:BarrioCreate) -> BarrioResponse:
-
-        data_dict = barrio.model_dump()
+    def insert_barrio(self, barrio_data: BarrioCreate) -> BarrioResponse:
+        # Convertir el modelo a un diccionario
+        data_dict = barrio_data.model_dump()
+        # Insertar en la base de datos
         response_dict = self.barrio_repo.insert(data_dict)
+        # Devolver la respuesta como modelo Pydantic
         return BarrioResponse(**response_dict)
 
-
-    def getBarrio(self, barrio_id: int) -> BarrioResponse:
-        
+    def get_barrio_by_id(self, barrio_id: int) -> Optional[BarrioResponse]:
         response_dict = self.barrio_repo.getById(barrio_id)
-
-        # Verificar si se encontró
         if not response_dict:
-            raise ValueError("Rol not found")
-
+            raise ValueError("Barrio not found")
+        # Convertir el diccionario a un modelo Pydantic
         return BarrioResponse(**response_dict)
-    
-    def getAllBarrios(self) -> list[BarrioResponse] :
 
+    def get_all_barrios(self) -> List[BarrioResponse]:
         response_dict = self.barrio_repo.getAll()
+        # Crear una lista de modelos Pydantic para la respuesta
+        barrios_list = [BarrioResponse(**barrio) for barrio in response_dict]
+        return barrios_list
 
-        bario_list = [BarrioResponse(**barrio) for barrio in response_dict]
+    def update_barrio(self, barrio_id: int, barrio_data: BarrioUpdate) -> BarrioResponse:
+        data_dict = barrio_data.model_dump()
+        updated_dict = self.barrio_repo.update(barrio_id, data_dict)
+        if not updated_dict:
+            raise ValueError("Barrio not found")
+        return BarrioResponse(**updated_dict)
 
-        return bario_list
+    def delete_barrio(self, barrio_id: int):
+        # Eliminar el barrio por ID
+        return self.barrio_repo.delete(barrio_id)

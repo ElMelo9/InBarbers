@@ -14,6 +14,5 @@ class RolResponse(BaseModel):
     fecha_md: Optional[datetime] = None
 
 class RolUpdate(BaseModel):
-    id_rol: int
     nombre_rol: str
     estado_rg: Optional[int] = None

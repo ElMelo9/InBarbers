@@ -1,32 +1,42 @@
-from src.models.rol import RolResponse,RolCreate,RolUpdate
-from src.services.roles_services import RolService
 from fastapi import HTTPException
+from src.models.rol import RolResponse, RolCreate, RolUpdate
+from src.services.roles_services import RolesService
 
-class RolController:
+class RolesController:
 
     def __init__(self):
-        self.rol_service = RolService()
-
+        self.roles_service = RolesService()
 
     def get_all_roles(self):
         try:
-            # Llama al servicio para obtener una lista de usuarios
-            roles: list[RolResponse] = self.rol_service.getAllRoles()
-
-            # Convierte cada usuario a un diccionario usando model_dump()
-            roles_dicts = [rol.model_dump() for rol in roles]
-
-            return roles_dicts  # Devolver la lista de diccionarios
+            roles_list = self.roles_service.get_all_roles()
+            return [rol.model_dump() for rol in roles_list]
         except Exception as e:
-            # Manejo de errores
             raise HTTPException(status_code=500, detail=str(e))
-        
 
-    def insert_rol(self, rol_dict:RolCreate):
+    def get_rol_by_id(self, rol_id: int):
         try:
-            rol_response= self.rol_service.insertRol(rol_dict)
-            return (rol_response.model_dump())
-        
+            rol = self.roles_service.get_rol_by_id(rol_id)
+            return rol.model_dump()
         except Exception as e:
-            # Manejo de errores
+            raise HTTPException(status_code=500, detail=str(e))
+
+    def insert_rol(self, rol_data: RolCreate):
+        try:
+            rol_response = self.roles_service.insert_rol(rol_data)
+            return rol_response.model_dump()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    def update_rol(self, rol_id: int, rol_data: RolUpdate):
+        try:
+            updated_rol = self.roles_service.update_rol(rol_id, rol_data)
+            return updated_rol.model_dump()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    def delete_rol(self, rol_id: int):
+        try:
+            return self.roles_service.delete_rol(rol_id)
+        except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))

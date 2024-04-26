@@ -15,7 +15,6 @@ class TipoDocResponse(BaseModel):
     fecha_md: Optional[datetime] = None
 
 class TipoDocUpdate(BaseModel):
-    id_tipo_documento: int
     nombre_tipo_documento: str
     sigla_tipo_documento: str
     estado_rg: Optional[int] = None
