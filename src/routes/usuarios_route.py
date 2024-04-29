@@ -18,7 +18,7 @@ def get_by_id(id_usuario,user=Depends(verificarToken)):
 
 
 @usuarios.post("/usuarios/insert", response_model=UsuarioResponse)
-def insert(usuario_data: UsuarioCreate,user=Depends(verificarToken)):
+def insert(usuario_data: UsuarioCreate):
     # Llama al controlador para insertar el rol
     return user_controller.insert_usuario(usuario_data)
 
