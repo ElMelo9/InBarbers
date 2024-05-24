@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
+from src.models.usuario import UsuarioResponse
 from src.models.login import LoginResponse
 from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
@@ -20,11 +21,15 @@ class Token:
         self.token_key = os.getenv("SECRET_KEY")
         self.tz = pytz.timezone('America/Bogota')
 
-     def generarToken(self,nombre_usuario: str)-> dict:
+     def generarToken(self,usuario: UsuarioResponse)-> dict:
         expiration = datetime.now(tz=self.tz) + timedelta(minutes=self.token_expire)
         payload = {
                 'exp': expiration,
-                'user_name': nombre_usuario,
+                'id_usuario': usuario['id_usuario'],
+                'Nombre_usuario': usuario['nombre_usuario'],
+                'rol': usuario['id_rol'],
+                'email':usuario['email_usuario']
+
                 }
         # Generar el token JWT
         token_usuario = jwt.encode(payload, self.token_key, algorithm=self.token_algorithm)

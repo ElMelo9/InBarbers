@@ -79,7 +79,7 @@ class UserController:
             if not self.user_security.verify_password(login.password_usuario, usuario['password_usuario']):
              raise HTTPException(status_code=401, detail="Contraseña incorrecta")
 
-            return LoginResponse(**self.user_token.generarToken(usuario['nombre_usuario']))
+            return LoginResponse(**self.user_token.generarToken(usuario))
         except Exception as e:
             # Manejo de errores
             raise HTTPException(status_code=500, detail=str(e))        
