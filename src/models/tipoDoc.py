@@ -18,5 +18,3 @@ class TipoDocUpdate(BaseModel):
     nombre_tipo_documento: str
     sigla_tipo_documento: str
     estado_rg: Optional[int] = None
-    fecha_rg: Optional[datetime] = None
-    fecha_md: Optional[datetime] = None  
