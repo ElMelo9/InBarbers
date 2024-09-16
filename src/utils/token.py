@@ -26,7 +26,7 @@ class Token:
         payload = {
                 'exp': expiration,
                 'id_usuario': usuario['id_usuario'],
-                'Nombre_usuario': usuario['nombre_usuario'],
+                'Nombre_usuario': usuario['nombre_usuario'] + ' ' + usuario['apellido_usuario'],
                 'rol': usuario['id_rol'],
                 'email':usuario['email_usuario']
 
