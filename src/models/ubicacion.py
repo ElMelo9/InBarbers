@@ -7,7 +7,7 @@ class UbicacionCreate(BaseModel):
     longitud_usuario: str
     latitud_usuario: str
 
-class AsignacionResponse(BaseModel):
+class UbicacionResponse(BaseModel):
     id_ubicacion: int
     id_usuario: int
     longitud_usuario: str
@@ -16,7 +16,7 @@ class AsignacionResponse(BaseModel):
     fecha_rg: Optional[datetime] = None
     fecha_md: Optional[datetime] = None
 
-class AsignacionUpdate(BaseModel):
+class UbicacionUpdate(BaseModel):
     id_ubicacion: int
     id_usuario: int
     longitud_usuario: str

@@ -19,6 +19,10 @@ class AsignacionRepository:
     def getByUsuario(self, id_usuario: str) -> Optional[dict]:
         response = self.client.from_("asig_servicio").select("*").eq("id_usuario", id_usuario).execute()
         return response.data[0] if response.data else None
+    
+    def getByServicio(self, id_servicio: int) -> Optional[dict]:
+        response = self.client.from_("asig_servicio").select("*").eq("id_servicio", id_servicio).execute()
+        return response.data[0] if response.data else None
 
     def getAll(self) -> list:
         response = self.client.from_("asig_servicio").select("*").execute()

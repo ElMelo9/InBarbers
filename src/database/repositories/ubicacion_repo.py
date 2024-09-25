@@ -16,6 +16,10 @@ class UbicacionRepository:
         response = self.client.from_("ubicaciones").select("*").eq("id_ubicacion", id).execute()
         return response.data[0] if response.data else None
     
+    def getByUsuario(self, id: int) -> Optional[dict]:
+        response = self.client.from_("ubicaciones").select("*").eq("id_usuario", id).execute()
+        return response.data[0] if response.data else None
+    
 
     def getAll(self) -> list:
         response = self.client.from_("ubicaciones").select("*").execute()
