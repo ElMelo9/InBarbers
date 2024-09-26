@@ -15,7 +15,7 @@ class EstadoService:
         return EstadoServicioResponse(**response_dict)
 
 
-    def getAsingnacionById(self, id: int) -> EstadoServicioResponse:
+    def getEstadoById(self, id: int) -> EstadoServicioResponse:
 
         response_dict = self.estado_repo.getById(id)
 

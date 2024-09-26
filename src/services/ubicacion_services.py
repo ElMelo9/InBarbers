@@ -58,6 +58,6 @@ class UbicacionService:
         return UbicacionResponse(**ubicacion_dict)
 
 
-    def deleteTipoServicio(self, id: int):
+    def deleteUbicacion(self, id: int):
 
         return self.tipo_repo.delete(id)

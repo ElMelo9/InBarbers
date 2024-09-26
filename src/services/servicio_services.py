@@ -58,7 +58,7 @@ class ServicioService:
         return ServicioResponse(**servicio_dict)
 
 
-    def deleteEstado(self, id: int):
+    def deleteServicio(self, id: int):
 
         return self.servicio_repo.delete(id)
 
