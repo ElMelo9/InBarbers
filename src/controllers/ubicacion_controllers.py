@@ -2,7 +2,7 @@ from src.models.ubicacion import UbicacionCreate,UbicacionResponse,UbicacionUpda
 from src.services.ubicacion_services import UbicacionService
 from fastapi import HTTPException
 
-class TipoServicioController:
+class UbicacionController:
 
     def __init__(self):
         self.ubicacionService =  UbicacionService()

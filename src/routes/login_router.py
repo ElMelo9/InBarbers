@@ -7,5 +7,4 @@ user_controller = UserController()
 
 @login.post("/login")
 def insert(usuario_data: Login):
-    # Llama al controlador para insertar el rol
     return user_controller.login_usuario(usuario_data)
