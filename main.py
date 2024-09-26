@@ -5,6 +5,11 @@ from src.routes.roles_route import roles
 from src.routes.tipoDoc_router import tipo_doc
 from src.routes.barrios_router import barrios
 from src.routes.login_router import login
+from src.routes.asignacion_router import asign
+from src.routes.estado_router import estado
+from src.routes.servicio_router import servicio
+from src.routes.tipoServicio_router import tipoServicio
+from src.routes.ubicacion_router import ubicacion
 from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -24,6 +29,12 @@ app.include_router(roles)
 app.include_router(tipo_doc)
 app.include_router(barrios)
 app.include_router(login)
+app.include_router(asign)
+app.include_router(estado)
+app.include_router(servicio)
+app.include_router(tipoServicio)
+app.include_router(ubicacion)
+
 
 
 #uvicorn main:app --reload
