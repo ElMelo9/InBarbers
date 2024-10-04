@@ -12,7 +12,12 @@ def get_all(user=Depends(verificarToken)):
 
 @ubicacion.get("/ubicacion/getById/{id}", response_model=UbicacionResponse)
 def get_by_id(id: int, user=Depends(verificarToken)):
-    return ubicacion_controller.get_ubicacion_by_id(id)
+    return ubicacion_controller.get_ultim_ubi_by_id(id)
+
+
+@ubicacion.get("/ubicacion/getByUser/{id}", response_model=UbicacionResponse)
+def get_by_user(id: int, user=Depends(verificarToken)):
+    return ubicacion_controller.get_ultim_ubi_by_id(id)
 
 @ubicacion.post("/ubicacion/insert", response_model=UbicacionResponse)
 def insert(ubicacion_data: UbicacionCreate, user=Depends(verificarToken)):

@@ -1,3 +1,4 @@
+from typing import List
 from src.models.servicio import ServicioCreate,ServicioResponse,ServicioUpdate
 from src.database.repositories.servicio_repo import ServicioRepository
 
@@ -26,15 +27,19 @@ class ServicioService:
         return ServicioResponse(**response_dict)
     
 
-    def getServicioByUsuario(self, id: int) -> ServicioResponse:
+    def getServicioByUsuario(self, id: int) -> List[ServicioResponse]:
+        response_list = self.servicio_repo.getByUsuario(id)
 
-        response_dict = self.servicio_repo.getByUsuario(id)
+        # Verificar si se encontraron servicios
+        if not response_list:
+            raise ValueError("User not found or no services found")
 
-        # Verificar si se encontró el usuario
-        if not response_dict:
-            raise ValueError("User not found")
+        # Si `response_list` es un solo diccionario, lo convertimos a una lista
+        if isinstance(response_list, dict):
+            response_list = [response_list]
 
-        return ServicioResponse(**response_dict)
+        # Convertir cada diccionario a un objeto ServicioResponse
+        return [ServicioResponse(**service) for service in response_list]
 
 
     def getAllServicio(self) -> list[ServicioResponse]:

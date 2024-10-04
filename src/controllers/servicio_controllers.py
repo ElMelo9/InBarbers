@@ -1,6 +1,7 @@
 from src.models.servicio import  ServicioCreate,ServicioResponse,ServicioUpdate
 from src.services.servicio_services import ServicioService
 from fastapi import HTTPException
+from typing import List
 
 class ServicioController:
 
@@ -31,6 +32,19 @@ class ServicioController:
             # Manejo de errores
             raise HTTPException(status_code=500, detail=str(e))
 
+
+    def get_servicio_by_usuario(self, id: int):
+        try:
+            # Ahora el servicio devuelve una lista de ServicioResponse
+            servicios: List[ServicioResponse] = self.service.getServicioByUsuario(id)
+
+            # Aplicar model_dump() a cada servicio en la lista
+            servicios = [servicio.model_dump() for servicio in servicios]
+
+            return servicios
+        except Exception as e:
+            # Manejo de errores
+            raise HTTPException(status_code=500, detail=str(e))
 
 
     def insert_servicio(self, servicio:ServicioCreate):

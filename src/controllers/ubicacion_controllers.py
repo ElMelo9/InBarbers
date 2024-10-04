@@ -22,14 +22,25 @@ class UbicacionController:
 
 
     def get_ubicacion_by_id(self,id: int):
+            try:
+                ubicacion: UbicacionResponse= self.ubicacionService.getUbicacionById(id)
+                ubicacion= ubicacion.model_dump()
+
+                return ubicacion
+            except Exception as e:
+                # Manejo de errores
+                raise HTTPException(status_code=500, detail=str(e))
+        
+
+    def get_ultim_ubi_by_id(self,id: int):
         try:
-            ubicacion: UbicacionResponse= self.ubicacionService.getUbicacionById(id)
+            ubicacion: UbicacionResponse= self.ubicacionService.getUltimUbiByUsuario(id)
             ubicacion= ubicacion.model_dump()
 
             return ubicacion
         except Exception as e:
             # Manejo de errores
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e))   
 
 
 

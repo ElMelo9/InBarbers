@@ -14,6 +14,10 @@ def get_all(user=Depends(verificarToken)):
 def get_by_id(id: int, user=Depends(verificarToken)):
     return servicio_controller.get_servicio_by_id(id)
 
+@servicio.get("/servicio/getByUser/{id}", response_model=list[ServicioResponse])
+def get_by_id(id: int, user=Depends(verificarToken)):
+    return servicio_controller.get_servicio_by_id(id)
+
 @servicio.post("/servicio/insert", response_model=ServicioResponse)
 def insert(servicio_data: ServicioCreate, user=Depends(verificarToken)):
     return servicio_controller.insert_servicio(servicio_data)

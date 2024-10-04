@@ -37,6 +37,17 @@ class UbicacionService:
         return UbicacionResponse(**response_dict)
     
 
+    def getUltimUbiByUsuario(self, id: int) -> UbicacionResponse:
+
+        response_dict = self.tipo_repo.getUltUbiByUsuario(id)
+
+        # Verificar si se encontró el usuario
+        if not response_dict:
+            raise ValueError("User not found")
+
+        return UbicacionResponse(**response_dict)
+    
+
     def getAllUbicacion(self) -> list[UbicacionResponse]:
 
         response_dict = self.tipo_repo.getAll()
