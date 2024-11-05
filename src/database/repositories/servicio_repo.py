@@ -18,7 +18,7 @@ class ServicioRepository:
     
     def getByUsuario(self, id_usuario: int) -> Optional[dict]:
         response = self.client.from_("servicios").select("*").eq("id_usuario", id_usuario).execute()
-        return response.data[0] if response.data else None
+        return response.data if response.data else None
     
     def getByTipoServicio(self, id_tipo_servicio: int) -> Optional[dict]:
         response = self.client.from_("servicios").select("*").eq("id_tipo_servicio", id_tipo_servicio).execute()

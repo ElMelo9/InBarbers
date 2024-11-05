@@ -29,7 +29,6 @@ class ServicioService:
 
     def getServicioByUsuario(self, id: int) -> List[ServicioResponse]:
         response_list = self.servicio_repo.getByUsuario(id)
-
         # Verificar si se encontraron servicios
         if not response_list:
             raise ValueError("User not found or no services found")
