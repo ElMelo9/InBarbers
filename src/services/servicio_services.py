@@ -31,7 +31,7 @@ class ServicioService:
         response_list = self.servicio_repo.getByUsuario(id)
         # Verificar si se encontraron servicios
         if not response_list:
-            raise ValueError("User not found or no services found")
+            return []
 
         # Si `response_list` es un solo diccionario, lo convertimos a una lista
         if isinstance(response_list, dict):
